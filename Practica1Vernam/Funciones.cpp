@@ -7,7 +7,7 @@
 // Autor: María Candelaria Fariña Rodríguez
 // Correo: alu0101029801@ull.edu.es
 // Fecha: 11/02/2020
-// Archivo: Vernam.cpp
+// Archivo: Funciones.cpp
 // Referencias:
 // 		Enunciado de la práctica
 //
@@ -32,31 +32,31 @@ vector<int> StringToAscii(string message) {
 // Convierte cada número ascii a su equivalente en binario en 8 bits
 vector<string> AsciiToBinary(vector<int> ascii) {  
 	
-  vector<string> binary;
+  	vector<string> binary;
 	
-  for (int i = 0; i < ascii.size(); ++i) {
+  	for (int i = 0; i < ascii.size(); ++i) {
 		string aux;
 		aux = bitset<8>(ascii[i]).to_string();     // Lo que devuelva el constructor lo pasa a caracteres
 		binary.push_back(aux);
 	}
 	
-  return binary;
+  	return binary;
 }
 
 // Pasa de binario a su equivalente número en la tabla ascii
 vector<int> BinaryToAscii(vector<string> binary) { 
 	
-  vector<int> ascii;
+ 	vector<int> ascii;
 	
-  for (int i = 0; i < binary.size(); i++) {
+  	for (int i = 0; i < binary.size(); i++) {
 		int entero;
 		string bin = binary[i];
 		bitset<8> num(bin);
-	  entero = (int)num.to_ulong();   // Con esto lo pasamos a un numero entero
+		entero = (int)num.to_ulong();   // Con esto lo pasamos a un numero entero
 		ascii.push_back(entero);
 	}
 	
-  return ascii;
+  	return ascii;
 }
 
 
@@ -64,12 +64,12 @@ vector<int> BinaryToAscii(vector<string> binary) {
 string AsciiToString(vector<int> bin_ascii){       // Se usa para el descifrado
 	string message;
 	
-  for (int i = 0; i < bin_ascii.size(); i++) {
+  	for (int i = 0; i < bin_ascii.size(); i++) {
 		char W = static_cast<char>(bin_ascii[i]); // Transformamos un tipo de dato en otro, aqui de int a char.
 		message.push_back(W);
 	}
 	
-  return message;
+ 	return message;
 }
 
 // Divide el número binario en tres partes iguales.
@@ -88,7 +88,7 @@ vector<string> Split(string binary) {
 		splitted.push_back(tmp3);
 	}
 	
-    else if (binary.size() == 16) {
+    	else if (binary.size() == 16) {
 
 		tmp1 = binary.substr(0, 8);
 		splitted.push_back(tmp1);
@@ -101,12 +101,12 @@ vector<string> Split(string binary) {
 // Cifrado de Vernam. Consiste en operar bit a bit, mediante la operación XOR entre el mensaje y la key (clave).
 string Vernam(string message, string key) {
 	
-  string cipher;
+	string cipher;
 	if (message.size() != key.size()) {
 
 		cout << "Los tamaños son distintos y no se puede cifrar." << endl;
-  }
-  else {
+  	}
+  	else {
 		for (int i = 0; i < message.size(); i++) {
 			if (message[i] == key[i])
 				cipher.push_back('0');
