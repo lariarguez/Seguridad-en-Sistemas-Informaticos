@@ -20,7 +20,7 @@
 using namespace std;
 
 int main(void) {
-  
+	
 	string message, cipher, key;             // Mensaje original, mensaje cifrado y clave
 	vector<int> ascii;			    // Vector en el que cada celda tiene valor en ascii de cada letra del mensaje introducido
 	vector<string> binary;	    // Vector que contiene en cada celda el equivalente en binario al valor ascii previo
@@ -48,47 +48,48 @@ int main(void) {
 
 	
 	switch (option) {
-	    case 0:
-		        cout << "Saliendo del programa." << endl;
+		
+		case 0:
+			cout << "Saliendo del programa." << endl;
 		        break;
 	
-      case 1:
+      		case 1:
       
-            cout << "Introduzca el mensaje a cifrar:" << endl;
-	          cin >> message;
-            cout << endl;
+            		cout << "Introduzca el mensaje a cifrar:" << endl;
+	          	cin >> message;
+            		cout << endl;
            
-            cout << "Introduzca la clave:" << endl;
-            cin >> key;
-            cout << endl;
+            		cout << "Introduzca la clave:" << endl;
+            		cin >> key;
+            		cout << endl;
       
-            ascii = StringToAscii(message);  	// Meto dentro de este vector cada el valor en ascii de la cada letra de la frase
-          	binary = AsciiToBinary(ascii); 	// Meto dentro de este vector un string con el valor en binario del valor ascii
+            		ascii = StringToAscii(message);  	// Meto dentro de este vector cada el valor en ascii de la cada letra de la frase
+          		binary = AsciiToBinary(ascii); 		// Meto dentro de este vector un string con el valor en binario del valor ascii
 
-	/* Con esto de aqui accedemos a cada uno de los strings del vector y los metemos dentro de otro string, lo uso para luego poder hacer la operacion XOR más comodamente */
-          	for (int i = 0; i < binary.size(); ++i) {
-	              tmp = binary[i];
-		            for (int j = 0; j < tmp.size(); ++j) {
+			/* Con esto de aqui accedemos a cada uno de los strings del vector y los metemos dentro de otro string, lo uso para luego poder hacer la operacion XOR más comodamente */
+          		for (int i = 0; i < binary.size(); ++i) {
+	              		tmp = binary[i];
+		            	for (int j = 0; j < tmp.size(); ++j) {
 			              message_binary.push_back(tmp.at(j));
-		            }
-            }
+		            	}
+            		}
       
 		        cipher = Vernam(message_binary, key);			// Aqui ya tenemos la frase en binario cifrada
             
-            split_cipher = Split(cipher);					// Aqui separo otra vez la cadena binaria cifrada en grupos de 8 bits, es para poder trabajar mejor
+            		split_cipher = Split(cipher);					// Aqui separo otra vez la cadena binaria cifrada en grupos de 8 bits, es para poder trabajar mejor
 		        ascii_cipher = BinaryToAscii(split_cipher);  	// Paso de binario a ascii
 		        cipher_character = AsciiToString(ascii_cipher); 	// Paso de valor ascii a su simbolo
-      
-		        decipher = Vernam(cipher, key);				  // Descifro volviendo a realizar la operacion XOR
+   
+		        decipher = Vernam(cipher, key); 	// Descifro volviendo a realizar la operacion XOR
 		       
             
-            split_decipher = Split(decipher);			  	  // Lo separo dentro de un vector de strings
+        		split_decipher = Split(decipher);	// Lo separo dentro de un vector de strings
 		        
-            ascii_decipher = BinaryToAscii(split_decipher);  	  // Paso los valores del los strings a ascii
+            		ascii_decipher = BinaryToAscii(split_decipher);  	  // Paso los valores del los strings a ascii
 		        
-            decipher_character = AsciiToString(ascii_decipher);	  // Paso de valor ascii a caracter
+            		decipher_character = AsciiToString(ascii_decipher);	  // Paso de valor ascii a caracter
 
-		   	    cout << "Mensaje original: " << message << endl;
+		   	cout << "Mensaje original: " << message << endl;
 		        cout << "Mensaje original en binario: " << message_binary << endl;
 		        cout << "Tamaño de la frase en binario: " << message_binary.size() << endl;
 		        cout << "Clave Aleatoria: " << key << endl;
@@ -97,30 +98,30 @@ int main(void) {
 		        cout << "Mensaje Descifrado: " << decipher_character << endl;
 		        break;
 
-	    case 2:
+	   	 case 2:
 
-            cout << "Introduzca el mensaje a cifrar: " << endl;
-	          cin >> message;
-            cout << endl;
+            		cout << "Introduzca el mensaje a cifrar: " << endl;
+	          	cin >> message;
+            		cout << endl;
       
-            cout << "Introduzca la clave:" << endl;
-            cin >> key;
-            cout << endl;
+            		cout << "Introduzca la clave:" << endl;
+            		cin >> key;
+            		cout << endl;
       
-            ascii = StringToAscii(message);  	// Meto dentro de este vector cada valor en ascii de cada letra del mensaje
+            		ascii = StringToAscii(message);  	// Meto dentro de este vector cada valor en ascii de cada letra del mensaje
 	          
-            binary = AsciiToBinary(ascii); 	// Meto dentro de este vector un string con el valor en binario del valor ascii
+            		binary = AsciiToBinary(ascii); 	// Meto dentro de este vector un string con el valor en binario del valor ascii
 
-	          /* Accedo a cada uno de los strings del vector y los metemos dentro de otro string, lo uso poder hacer la operacion XOR */
-	          for (int i = 0; i < binary.size(); ++i) {
-	              tmp = binary[i];
+	        	/* Accedo a cada uno de los strings del vector y los metemos dentro de otro string, lo uso poder hacer la operacion XOR */
+	          	for (int i = 0; i < binary.size(); ++i) {
+	              		tmp = binary[i];
 		            
-                for (int j = 0; j < tmp.size(); ++j) {
+                		for (int j = 0; j < tmp.size(); ++j) {
 			              message_binary.push_back(tmp.at(j));
-		            }
-            }
+		            	}
+            		}
 		        
-            cipher = Vernam(message_binary, key);			// Aqui ya tenemos la frase en binario cifrada
+           		cipher = Vernam(message_binary, key);			// Aqui ya tenemos la frase en binario cifrada
 		        split_cipher = Split(cipher);					// Aqui separo otra vez la cadena binaria cifrada en grupos de 8 bits, es para poder trabajar mejor
 		        ascii_cipher = BinaryToAscii(split_cipher);  	// Paso de binario a ascii
 		        cipher_character = AsciiToString(ascii_cipher); 	// Paso de valor ascii a su simbolo
@@ -139,9 +140,8 @@ int main(void) {
 		        cout << "Mensaje Descifrado: " << decipher_character << endl;
 		        break;
 
-	    default:
-		    
-	   		    cout << "Valor no válido." << endl;
+	    	default:
+		    	cout << "Valor no válido." << endl;
 		        break;
     	}
 }
